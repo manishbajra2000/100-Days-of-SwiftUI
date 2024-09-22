@@ -192,7 +192,7 @@ if score > 9000 {
     } else {
         print("It's not over 9000!")
     }
-}`
+}
 
 if score > 9000 {
     print("It's over 9000!")
@@ -210,6 +210,82 @@ if (isOwner == true && isEditingEnabled) || isAdmin == true {
 `
 any time you mix && and || in a single condition you should almost certainly use parentheses to make the result clear.
 */
+
+
+
+// SWITCH
+
+enum weather {
+    case rainy, sunny, windy, snowy, unknown
+}
+
+let forecast = weather.sunny
+
+switch forecast {
+case .rainy:
+    print("Get an umbrella")
+case .snowy:
+    print("School is cancelled")
+case .sunny:
+    print("It should be a nice day")
+case .windy:
+    print("Bring a jacket.")
+case .unknown:
+    print("Our forecast generator is broken")
+}
+
+let place = "Metropolis"
+
+switch place {
+case "Gotham":
+    print("You're Batman!")
+case "Mega-City One":
+    print("You're Judge Dredd!")
+case "Wakanda":
+    print("You're Black Panther!")
+default:
+    print("Who are you?")
+}
+
+
+let day = 5
+print("My true love gave to me…")
+
+switch day {
+case 5:
+    print("5 golden rings")
+case 4:
+    print("4 calling birds")
+case 3:
+    print("3 French hens")
+case 2:
+    print("2 turtle doves")
+default:
+    print("A partridge in a pear tree")
+}
+
+let day1 = 5
+print("My true love gave to me…")
+
+switch day1 {
+case 6:
+    print("6 silver spoons")
+    fallthrough
+case 5:
+    print("5 golden rings")
+    fallthrough
+case 4:
+    print("4 calling birds")
+    fallthrough
+case 3:
+    print("3 French hens")
+    fallthrough
+case 2:
+    print("2 turtle doves")
+    fallthrough
+default:
+    print("A partridge in a pear tree")
+}
 
 
 

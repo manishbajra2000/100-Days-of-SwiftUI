@@ -288,6 +288,39 @@ default:
 }
 
 
+//Ternary operator
+let age2 = 17
+let canVote = age2 >= 18 ? "Yes" : "No"
+
+let hour = 23
+print(hour >= 12 ? "It's before noon." : "It's after noon")
+
+
+let names = ["Sadie", "Madie", "Badie"]
+let crewCount = names.isEmpty ? "No one." : "\(names.count) people"
+
+print(crewCount)
+
+enum Theme {
+    case light, dark
+}
+
+let theme = Theme.light
+
+let background = theme == .dark ? "Black" : "White"
+print(background)
+
+var isAuthenticated = true
+print(isAuthenticated ? "Welcome!" : "Who are you?")
+
+
+isAuthenticated = false
+if isAuthenticated {
+    print("Welcome!")
+}else {
+    print("Who are you?")
+}
+
 
 
 

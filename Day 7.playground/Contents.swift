@@ -156,7 +156,7 @@ func hireEmployees(location: String) { }
 let lyric = "I see a red door and i wanted it painted black."
 print(lyric.hasPrefix("I see"))  //returns true
 
-// when you use _ before parameter name you dont need to specify when function is called		
+// when you use _ before parameter name you dont need to specify when function is called
 func isUppercase(_ string: String) -> Bool {
     string == string.uppercased()
 }

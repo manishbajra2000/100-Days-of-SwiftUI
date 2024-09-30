@@ -31,7 +31,7 @@ func SquareRoot(of number: Int) throws -> Int {
 do {
     let number = 10_000
     let squareroot = try SquareRoot(of: number)
-    print("Square root of \(number) is \(squareroot)")
+    print("Square root   of \(number) is \(squareroot)")
 }catch squareRootErrors.OutOfBounds {
     print ("Set the number between 1 to 10,000")
 }catch squareRootErrors.NoRoot {

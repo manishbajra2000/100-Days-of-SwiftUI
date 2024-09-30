@@ -65,5 +65,24 @@ do {
 }catch passwordError.short {
     print("My 3 year old cousin have the same password.")
 }catch {
-    print("Error found.")
+    print("Error found: \(error.localizedDescription)")  //catch 'em all
+}
+
+enum BuildingError: Error {
+    case tooHigh
+    case tooLow
+}
+func constructBuilding(floors: Int) throws {
+    if floors < 10 {
+        throw BuildingError.tooLow
+    } else if floors > 500 {
+        throw BuildingError.tooHigh
+    }
+    print("Perfect - let's get building!")
+}
+
+do{
+    try constructBuilding(floors: 23)
+}catch{
+    print("Error found")
 }

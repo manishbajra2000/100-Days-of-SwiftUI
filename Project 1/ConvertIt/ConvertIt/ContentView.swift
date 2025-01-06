@@ -37,9 +37,9 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text("Temperature in Celsius: \(returnCelsius)")
-                    Text("Temperature in Fahrenheit: \(returnFarhenheit)")
-                    Text("Temperature in Kelvin: \(returnKelvin)")
+                    Text("Temperature in Celsius: \(returnCelsius.formatted())")
+                    Text("Temperature in Fahrenheit: \(returnFarhenheit.formatted())")
+                    Text("Temperature in Kelvin: \(returnKelvin.formatted())")
                 }
             }
             .navigationTitle(Text("ConvertIt"))

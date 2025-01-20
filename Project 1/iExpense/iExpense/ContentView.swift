@@ -13,6 +13,7 @@ struct ExpenseItems: Identifiable, Codable {
     var id = UUID()
     let name: String
     let type: String
+    let currencyType: String
     let amount: Double
 }
 
@@ -23,13 +24,15 @@ class Expenses {
             if let encodedData = try? JSONEncoder().encode(items) {
                 UserDefaults.standard.set(encodedData, forKey: "Items")
             }
+            
         }
     }
     
     init() {
-        if let savedItems =  UserDefaults.standard.data(forKey: "Items") {
-            if let decodedItems = try? JSONDecoder().decode([ExpenseItems].self, from: savedItems) {
-                items = decodedItems
+        
+        if let savedItems = UserDefaults.standard.data(forKey: "Items") {
+            if let decodedData = try? JSONDecoder().decode([ExpenseItems].self, from: savedItems) {
+                items = decodedData
                 return
             }
         }
@@ -41,24 +44,71 @@ class Expenses {
 struct ContentView: View {
     
     @State private var expenses = Expenses()
+    @State private var businessExpenses = Expenses()
+    @State private var personalExpenses = Expenses()
     
     @State private var showingAddView = false
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(expenses.items, id: \.id) { item in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(item.name)
-                                .font(.headline)
-                            Text(item.type)
+                Section("Personal Expenses") {
+                    ForEach(expenses.items, id: \.id) { item in
+                        if item.type == "Personal"{
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(item.name)
+                                        .font(.headline)
+                                    Text(item.type)
+                                }
+                                Spacer()
+                                Text(item.amount, format: .currency(code: item.currencyType))
+                                    .foregroundStyle(item.amount < 100 ? .green : (item.amount < 1000 ? .orange : .red))
+                                    .fontWeight(item.amount < 100 ? .regular : item.amount < 1000 ? .semibold : .bold)
+                            }
                         }
-                        Spacer()
-                        Text(item.amount, format: .currency(code: "NPR"))
                     }
+                    .onDelete(perform: removeExpense)
                 }
-                .onDelete(perform: removeExpense)
+                    
+                Section("Business Expenses") {
+                    ForEach(expenses.items, id: \.id) { item in
+                        if item.type == "Business"{
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(item.name)
+                                        .font(.headline)
+                                    Text(item.type)
+                                }
+                                Spacer()
+                                Text(item.amount, format: .currency(code: item.currencyType))
+                                    .foregroundStyle(item.amount < 100 ? .green : (item.amount < 1000 ? .orange : .red))
+                                    .fontWeight(item.amount < 100 ? .regular : item.amount < 1000 ? .semibold : .bold)
+                            }
+                        }
+                    }
+                    .onDelete(perform: removeExpense)
+                }
+
+                Section("Groceries Expenses") {
+                    ForEach(expenses.items, id: \.id) { item in
+                        if item.type == "Groceries"{
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(item.name)
+                                        .font(.headline)
+                                    Text(item.type)
+                                }
+                                Spacer()
+                                Text(item.amount, format: .currency(code: item.currencyType))
+                                    .foregroundStyle(item.amount < 100 ? .green : (item.amount < 1000 ? .orange : .red))
+                                    .fontWeight(item.amount < 100 ? .regular : item.amount < 1000 ? .semibold : .bold)
+                            }
+                        }
+                    }
+                    .onDelete(perform: removeExpense)
+                }
+
                 
             }
             .navigationTitle("iExpense")
